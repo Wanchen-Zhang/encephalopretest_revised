@@ -8,6 +8,9 @@ import math
 def cleanse_data(df):
     # Your task here is to remove data from any ticker that isn't XXY, sort chronologically and return a dataframe
     # whose only column is 'Adj Close'
+    for i in range(0,335):
+        if(df.Ticker[i]!='XXY'):
+            df=df.drop(index=i)
     dfclean = df
     return dfclean
 
@@ -16,6 +19,7 @@ def mc_sim(sims, days, df):
     # The code for a crude monte carlo simulation is given below. Your job is to extract the mean expected price
     # on the last day, as well as the 95% confidence interval.
     # Note that the z-score for a 95% confidence interval is 1.960
+    
     returns = df.pct_change()
     last_price = df.iloc[-1]
 
