@@ -51,8 +51,8 @@ def mc_sim(sims, days, df):
         sum_all=sum_all+mean[k]
     std=sum_all.std()
     mean_val=sum_all/sims
-    ci_95_low=mean_val-1.960*std
-    ci_95_up=mean_val+1.960*std
+    ci_95_low=mean_val-1.960*std/np.sqrt(sims)
+    ci_95_up=mean_val+1.960*std/np.sqrt(sims)
     ci_95=(ci_95_low,ci_95_up)
     # FILL OUT THE REST OF THE CODE. The above code has given you 'sims' of simulations run 'days' days into the future.
     # Your task is to return the expected price on the last day +/- the 95% confidence interval.
