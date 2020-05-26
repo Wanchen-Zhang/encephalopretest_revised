@@ -40,10 +40,23 @@ def mc_sim(sims, days, df):
             count += 1
 
         simulation_df[x] = price_series
-
+    sum=0
+    sum_all=0
+    mean=np.zeros(sims)
+    for i in range(sims):
+        for j in range(len(simulation_df[i])):
+                       sum=sum+simulation_df[i][j]
+        mean[i]=sum/len(simulation_df[i])
+    for k in range(sims):
+        sum_all=sum_all+mean[k]
+    std=sum_all.std()
+    mean_val=sum_all/sims
+    ci_95_low=mean_val-1.960*std
+    ci_95_up=mean_val+1.960*std
+    ci_95=(ci_95_low,ci_95_up)
     # FILL OUT THE REST OF THE CODE. The above code has given you 'sims' of simulations run 'days' days into the future.
     # Your task is to return the expected price on the last day +/- the 95% confidence interval.
-    return
+    return mean_val, ci_95
 
 def main():
     filename = '20192020histdata.csv'
